@@ -61,10 +61,15 @@ body {
   align-items: center;
 }
 
-.btn-add-cart{
+.btn-add-cart, .btn-view{
   background-color:#fec39f ;
   border: none;
   padding: 10px;
   border-radius: 5px;
   color: #000;
+}
+.btn-view{
+  position: fixed;
+  top: 0;
+  right: 0%;
 }

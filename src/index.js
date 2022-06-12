@@ -9,6 +9,8 @@ import {
   Route,
 } from "react-router-dom";
 import  Home  from './components/Home';
+import { CartProvider } from "react-use-cart";
+import { Cart } from './components/Cart';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -16,8 +18,10 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}/>
-      <Route path="/home" element={<Home />} />
-      {/* <Route path="/cart" element={<Cart />} /> */}
+         
+      <Route path="/home" element={<CartProvider> <Home /> </CartProvider>} />
+      
+      <Route path="/cart" element={<CartProvider> <Cart /> </CartProvider>} />
 
 
     </Routes>
