@@ -5,6 +5,7 @@ import axios from "axios";
 import { Cart } from "./Cart";
 import { useCart } from "react-use-cart";
 import { Link } from "react-router-dom";
+import { Loader } from "./Loader";
 const API_URL = "https://restrobillingsystemjs.herokuapp.com/menu_list";
 
 const Home = () => {
@@ -16,23 +17,19 @@ const Home = () => {
         axios.get(API_URL).then((response) => {
             setGetMenu(response.data)
             console.log(response.data)
+            setIsLoading(false)
         })
-        setIsLoading(false)
     }, [])
 
-    const filterItem = (category) => {
-        const newItems = getMenu.filter((item) => item.category === category);
-        setGetMenu(newItems);
-    };
 
-    if (isloading) return <p>Loading...</p>
+    if(isloading) return <Loader/>
 
     return (
         <>
             {/* <Categories filterItem={filterItem} /> */}
 
             <div className="section-center mt-5">
-                {getMenu &&
+                {getMenu ?
                     getMenu?.map((menuItem) => {
                         const { id, title, price, image, description } = menuItem;
                         console.log(image)
@@ -50,7 +47,7 @@ const Home = () => {
                                 </div>
                             </article>
                         );
-                    })}
+                    }): <Loader/>}
             </div>
             <div className="text-end py-2 px-3">
                 <button className="btn-view" ><Link style={{ color: 'inherit' }} to='/cart'>View Cart {updateItemQuantity}</Link></button>
